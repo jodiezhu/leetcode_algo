@@ -18,10 +18,10 @@ class Solution(object):
         for i in xrange(len(nums)):
             if nums[i] != i+1:
                 return i+1
-        return nums[-1]+1
+        return nums[-1]+1 
     
     def swap(self,nums,i):
-        c = nums[i] - 1
+        c = nums[i] - 1 #must have!!! or the nums[i]-1 has already been updated!!!
         nums[i], nums[c] = nums[c], nums[i]
        
 s=Solution()
