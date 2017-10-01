@@ -5,7 +5,7 @@ Created on Sun Oct  1 14:14:45 2017
 
 @author: jie
 """
-
+# Find missing positive
 class Solution(object):
     def firstMissingPositive(self,nums):
         if not nums:
