@@ -25,3 +25,10 @@ class MedianFinder(object):
         if len(large) > len(small):
             return float(large[0])
         return (large[0] - small[0]) / 2.0
+
+#testing!    
+obj = MedianFinder()
+obj.addNum(1)
+obj.addNum(7)
+obj.addNum(4)
+print(obj.findMedian())
