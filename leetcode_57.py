@@ -42,3 +42,9 @@ class Solution(object):
                 s = min(s, i.start)
                 e = max(e, i.end)
         return left + [Interval(s, e)] + right
+
+s=Solution()
+ans=s.insert([Interval(1,3),Interval(6,9)],Interval(0,8))
+
+print(ans[0].end)
+    
