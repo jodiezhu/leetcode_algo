@@ -18,7 +18,7 @@ class Solution(object):
         sorted=[]
         ans=[0]*len(nums)
 
-        for i in range(len(nums)-1,-1,-1):
+        for i in range(len(nums))[::-1]:
             index=self.findIndex(sorted,nums[i])
             ans[i]=index
             sorted.insert(index,nums[i]) ##Using insert!!!!!!
