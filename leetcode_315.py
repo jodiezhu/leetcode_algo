@@ -12,7 +12,7 @@ To the right of 1 there is 0 smaller element.
 Return the array [2, 1, 1, 0].
 
 '''
-
+#Method 1: Binary Search
 class Solution(object):
     def countSmaller(self, nums):
         sorted=[]
@@ -59,5 +59,33 @@ def findIndex(self,sorted,target):
         return start
 
 '''
+'''
+#Method 2:Recurrsive: Mergesort
+def countSmaller(nums):
+    smaller = [0] * len(nums)
+    sort(list(enumerate(nums)),smaller)
+    return smaller
+
+        
+def sort(enum,smaller):
+    half = len(enum) / 2
+    if half:
+        left, right = sort(enum[:half],smaller), sort(enum[half:],smaller)
+        for i in range(len(enum))[::-1]:
+            print(left,right)
+            if not right or left and left[-1][1] > right[-1][1]:
+                smaller[left[-1][0]] += len(right)
+                enum[i] = left.pop()
+            else:
+                enum[i] = right.pop()
+            print(left,right)
+    return enum
+        
+
+
+print(countSmaller([5,2,6,1]))
+'''
+
+
 s=Solution()
 print(s.countSmaller([5,2,6,1]))
