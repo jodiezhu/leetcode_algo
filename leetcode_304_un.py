@@ -5,54 +5,57 @@ Created on Sun Oct  1 14:14:45 2017
 
 @author: jie
 """
-import numpy
+class NumMatrix(object):
+    def NumMatrix(self,matrix):
+        if not matrix: return 
+        self.m=len(matrix)
+        self.n=len(matrix[0])
 
-def NumMatrix(mat):
-    if len(mat)==0 or len(mat[0])==0: return 0
-    m=len(mat)
-    n=len(mat[0])
-
-    tree= numpy.zeros(shape=(m+1,n+1))
-    nums= numpy.zeros(shape=(m,n))
+        self.matrix, self.bit = [[0]*(self.n) for _ in range(self.m)], [[0]*(self.n+1) for _ in range(self.m+1)]
     
-    for i in range(m):
-        for j in range(n):
-            updatebit(mat,m,n,tree,nums,i,j,mat[i][j])
-    return tree
+        for i in range(self.m):
+            for j in range(self.n):
+                self.update(i,j,matrix[i][j])
+        return self.bit
 
 
-def updatebit(mat,m,n,tree,nums,row , col ,val):
-    delta=val-nums[row][col]
-    nums[row][col]=val
-        
-    for i in range(row+1,m+1):
-        for j in range(col+1,n+1):
-            tree[i][j]+=delta
-            j += j & (-j)          
-        i += i & (-i)
-
-
-def SumRegion(tree,row1,col1,row2,col2):
-    return getsum(tree,row2+1,col2+1)
+    def update(self,row , col ,val):
+        delta=val-self.matrix[row][col]
+        self.matrix[row][col]=val
+        i=row+1
     
-def getsum(tree,row,col):
-    s = 0  
-    i = row # index in BITree[] is 1 more than the index in arr[]
+        while i<=self.m:
+            j=col+1
+            while j<=self.n:
+                self.bit[i][j]+=delta
+                j += j & (-j)          
+            i += i & (-i)
 
-    while i > 0:
-        j=col
-        while j>0:
-            s+=tree[i][j]
-            j-=j & (-j)
-        i -= i & (-i)
-    return s
 
-freq = [[3,0,1],[5,6,3],[1,2,0],[4,1,0]]
-BITTree = NumMatrix(freq)
-print(freq)     
-print(BITTree)
+    def SumRegion(self,row1,col1,row2,col2):
+        return self.getsum(row2,col2)+self.getsum(row1-1,col1-1)-self.getsum(row1-1,col2)-self.getsum(row2,col1-1)
+    
+    
+    def getsum(self,row,col):
+        s = 0  
+        i = row+1
 
-print(getsum(BITTree,2,2))
+        while i >0:
+            j=col+1
+            while j>0:
+                s+=self.bit[i][j]
+                print(s)
+                print(i,j)
+                j-=j & (-j)
+                print(i,j)
+            i -= i & (-i)
+            print(i,j)
+        return s
+
+freq = NumMatrix()
+print(freq.NumMatrix([[3,0,1],[5,6,3],[1,2,0]]))
+
+print(freq.getsum(0,2))
 
 
 
