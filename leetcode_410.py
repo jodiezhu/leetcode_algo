@@ -24,7 +24,7 @@ class Solution(object):
         if m==1: return r
 
         while l<=r: 
-            mid=int((l+r)/2)
+            mid=(l+r)//2
             if self.validcheck(mid,nums,m):
                 r=mid-1
             else:
