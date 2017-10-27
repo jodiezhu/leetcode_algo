@@ -7,7 +7,7 @@ class Solution(object):
         """
 
         # 1.Count the frequencies for chars in t
-        hash_map = dict()
+        hash_map = {}
         for c in t:
             if c in hash_map:
                 hash_map[c] += 1
@@ -15,7 +15,7 @@ class Solution(object):
                 hash_map[c] = 1
 
 
-        #2.    
+        # 2. moving start and end 
         start, end = 0, 0       
         min_window_length = len(s) + 1 # If the minimal length doesn't change, it means there's no valid window        
         min_window_start = 0 # Start point of the minimal window        
@@ -27,11 +27,9 @@ class Solution(object):
                 if hash_map[s[end]] > 0:
                     num_of_chars_to_be_included -= 1
                 hash_map[s[end]] -= 1
-            print(start,end)
+
             # If the current window has all the desired chars
             while num_of_chars_to_be_included == 0:
-                print("***")
-                print(start,end)
                 if end - start + 1 < min_window_length:
                     min_window_length = end - start + 1
                     min_window_start = start
@@ -44,7 +42,7 @@ class Solution(object):
                 start += 1
             end += 1
 
-        if min_window_length == len(s) + 1:
+        if min_window_length == len(s) + 1: #inital large number
             return ""
         else:
             return s[min_window_start:min_window_start + min_window_length]
